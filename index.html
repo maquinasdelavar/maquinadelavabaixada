@@ -28,6 +28,828 @@
 
   <style>
     /* ========================================
+       ANNOUNCEMENT BAR
+       ======================================== */
+    .announcement-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+      background: linear-gradient(90deg, #0052CC 0%, #667eea 50%, #764ba2 100%);
+      color: #fff;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .announcement-bar .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #FCD34D;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulseDot 1.4s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulseDot {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.5);
+        opacity: 0.7;
+      }
+    }
+
+    .announcement-bar .bar-cta {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 0.78rem;
+      color: #fff;
+      text-decoration: none;
+      margin-left: 8px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .announcement-bar .bar-cta:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    /* bump navbar + body down more for announcement bar */
+    body {
+      padding-top: 108px !important;
+    }
+
+    .navbar {
+      top: 38px !important;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 96px !important;
+      }
+
+      .announcement-bar {
+        font-size: 0.74rem;
+        padding: 7px 12px;
+      }
+
+      .announcement-bar .bar-cta {
+        display: none;
+      }
+    }
+
+    /* ========================================
+       HERO SOCIAL PROOF BAR
+       ======================================== */
+    .hero-social-proof {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .hsp-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .hsp-stars {
+      color: #FCD34D;
+      font-size: 1rem;
+      letter-spacing: -2px;
+    }
+
+    .hsp-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    @media (max-width: 600px) {
+      .hsp-divider {
+        display: none;
+      }
+
+      .hero-social-proof {
+        gap: 14px;
+      }
+
+      .hsp-item {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* ========================================
+       BRAND STRIP
+       ======================================== */
+    .brand-strip {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      overflow: hidden;
+    }
+
+    .brand-strip-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand-strip-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      margin-right: 8px;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      transition: var(--transition);
+    }
+
+    .brand-pill:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(0, 102, 255, 0.04);
+    }
+
+    /* ========================================
+       TESTIMONIALS
+       ======================================== */
+    .testimonials {
+      background: var(--bg-secondary);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .testimonial-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .testimonial-card:hover {
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-4px);
+    }
+
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      font-size: 4rem;
+      color: var(--primary);
+      opacity: 0.12;
+      line-height: 1;
+      font-family: Georgia, serif;
+    }
+
+    .testimonial-stars {
+      color: #F59E0B;
+      font-size: 1.1rem;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .testimonial-text {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .testimonial-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    .testimonial-role {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .testimonial-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #DCFCE7;
+      color: #15803D;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-top: 4px;
+    }
+
+    /* ========================================
+       STATS COUNTER
+       ======================================== */
+    .stats-section {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      padding: 72px 0;
+    }
+
+    .stats-section h2 {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .stats-section>.container>.section-lead {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 56px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 32px 20px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-card .stat-number {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #a5b4fc 0%, #67e8f9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-card .stat-label {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .stat-card .stat-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    /* ========================================
+       FAQ
+       ======================================== */
+    .faq-section {
+      background: #fff;
+    }
+
+    .faq-list {
+      max-width: 780px;
+      margin: 48px auto 0;
+    }
+
+    .faq-item {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .faq-item.open {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.08);
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 20px 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .faq-question:hover {
+      background: var(--bg-secondary);
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      color: var(--primary);
+    }
+
+    .faq-item.open .faq-icon {
+      background: var(--primary);
+      color: #fff;
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.2s ease;
+      padding: 0 24px;
+    }
+
+    .faq-answer.open {
+      max-height: 300px;
+      padding: 0 24px 20px;
+    }
+
+    .faq-answer p {
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    /* ========================================
+       CTA FINAL BANNER
+       ======================================== */
+    .cta-final {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 80px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-final::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+    }
+
+    .cta-final::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+    }
+
+    .cta-final .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-final h2 {
+      color: #fff;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 16px;
+    }
+
+    .cta-final p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.125rem;
+      margin-bottom: 40px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-final .btn-cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-wpp-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 18px 36px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+      transition: var(--transition);
+    }
+
+    .btn-wpp-large:hover {
+      background: #20BA5A;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(37, 211, 102, 0.55);
+    }
+
+    .btn-wpp-large svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 16px 30px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #fff;
+    }
+
+    .cta-trust-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .cta-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    /* ========================================
+       SECTION HEADERS
+       ======================================== */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 102, 255, 0.08);
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .section-header h2 {
+      margin-bottom: 12px;
+    }
+
+    .section-lead {
+      color: var(--text-secondary);
+      font-size: 1.0625rem;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* ========================================
+       NAVBAR PROFISSIONAL
+       ======================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.10);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      padding: 0;
+    }
+
+    .navbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .navbar-logo img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 6px;
+    }
+
+    .navbar-brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .navbar-brand-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .navbar-brand-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .navbar-wpp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #25D366;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+      white-space: nowrap;
+    }
+
+    .navbar-wpp:hover {
+      background: #20BA5A;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+    }
+
+    .navbar-wpp svg {
+      width: 18px;
+      height: 18px;
+      fill: #fff;
+    }
+
+    .navbar-cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 10px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 2px solid var(--primary);
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .navbar-cta-secondary:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Hamburger (mobile) */
+    .navbar-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px;
+      border-radius: 8px;
+    }
+
+    .navbar-toggle span {
+      display: block;
+      width: 24px;
+      height: 2.5px;
+      background: var(--text-primary);
+      border-radius: 10px;
+      transition: var(--transition);
+    }
+
+    .navbar-mobile {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px 24px 20px;
+      border-top: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .navbar-mobile.open {
+      display: flex;
+    }
+
+    .navbar-mobile .navbar-wpp,
+    .navbar-mobile .navbar-cta-secondary {
+      width: 100%;
+      justify-content: center;
+      font-size: 1rem;
+      padding: 13px 20px;
+    }
+
+    /* WhatsApp flutuante */
+    .wpp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      background: #25D366;
+      color: #fff;
+      border-radius: 50%;
+      width: 62px;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+      text-decoration: none;
+      transition: var(--transition);
+      animation: pulseFab 2.5s infinite;
+    }
+
+    .wpp-float:hover {
+      background: #20BA5A;
+      transform: scale(1.12);
+      animation: none;
+    }
+
+    .wpp-float svg {
+      width: 32px;
+      height: 32px;
+      fill: #fff;
+    }
+
+    @keyframes pulseFab {
+
+      0%,
+      100% {
+        box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+      }
+
+      50% {
+        box-shadow: 0 6px 36px rgba(37, 211, 102, 0.75);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-actions {
+        display: none;
+      }
+
+      .navbar-toggle {
+        display: flex;
+      }
+
+      .wpp-float {
+        bottom: 20px;
+        right: 16px;
+        width: 54px;
+        height: 54px;
+      }
+    }
+
+    /* Offset do conteúdo por causa da navbar fixa */
+    body {
+      padding-top: 70px;
+    }
+
+    /* ========================================
        VARIÁVEIS E RESET
        ======================================== */
     :root {
@@ -135,7 +957,7 @@
        ======================================== */
     .hero {
       background: var(--bg-gradient);
-      padding: 120px 0 100px;
+      padding: 90px 0 80px;
       position: relative;
       overflow: hidden;
     }
@@ -437,10 +1259,12 @@
     }
 
     .logo {
-      max-width: 180px;
+      max-width: 220px;
       height: auto;
       display: block;
-      margin: 0 auto 32px;
+      margin: 0 auto 28px;
+      filter: brightness(0) invert(1);
+      opacity: 0.92;
     }
 
     /* ========================================
@@ -501,6 +1325,7 @@
       .main-content {
         grid-template-columns: 1fr;
       }
+
       .sticky-cta {
         position: static;
         margin-top: 40px;
@@ -714,15 +1539,15 @@
        ======================================== */
     @media (max-width: 768px) {
       .hero {
-        padding: 80px 0 60px;
+        padding: 60px 0 50px;
       }
 
       .container {
-        padding: 0 20px;
+        padding: 0 16px;
       }
 
       .card {
-        padding: 24px;
+        padding: 20px;
       }
 
       .cta-group {
@@ -734,11 +1559,48 @@
       }
 
       .stats {
-        gap: 40px;
+        gap: 32px;
       }
 
       .category-card {
-        padding: 20px;
+        padding: 18px;
+      }
+
+      .categories-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .benefit {
+        gap: 14px;
+      }
+
+      .benefit-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.4rem;
+      }
+
+      h2 {
+        font-size: 1.5rem !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .navbar-logo img {
+        height: 38px;
+      }
+
+      .navbar-brand-name {
+        font-size: 0.95rem;
       }
     }
 
@@ -765,45 +1627,147 @@
 </head>
 
 <body>
+  <!-- ========================================
+       ANNOUNCEMENT BAR
+       ======================================== -->
+  <div class="announcement-bar" role="alert">
+    <span class="pulse-dot"></span>
+    <span>🔥 Atendimento <strong>HOJE</strong> — Técnico disponível agora em SP e região</span>
+    <a href="#formulario-diagnostico" class="bar-cta">Solicitar Agora →</a>
+  </div>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M7HXPKD8" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
   <!-- ========================================
+       NAVBAR PROFISSIONAL
+       ======================================== -->
+  <nav class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="navbar-inner">
+      <!-- Logo -->
+      <a href="#" class="navbar-logo" aria-label="Doutor Resolve - Início">
+        <img src="img.png" alt="Marcas atendidas: Brastemp, Consul, Electrolux">
+        <div class="navbar-brand-text">
+          <span class="navbar-brand-name">🔧 Doutor Resolve</span>
+          <span class="navbar-brand-sub">Máquinas de Lavar</span>
+        </div>
+      </a>
+
+      <!-- Ações desktop -->
+      <div class="navbar-actions">
+        <a href="#formulario-diagnostico" class="navbar-cta-secondary">
+          🩺 Diagnóstico Grátis
+        </a>
+        <a href="https://wa.me/5511980375558?text=Olá!%20Preciso%20de%20ajuda%20com%20minha%20máquina%20de%20lavar"
+          class="navbar-wpp" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.999-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+
+      <!-- Hamburguer (mobile) -->
+      <button class="navbar-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Menu mobile expandido -->
+    <div class="navbar-mobile" id="navMobile" role="menu">
+      <a href="#formulario-diagnostico" class="navbar-cta-secondary" onclick="closeNav()">🩺 Diagnóstico Grátis</a>
+      <a href="https://wa.me/5511980375558?text=Olá!%20Preciso%20de%20ajuda%20com%20minha%20máquina%20de%20lavar"
+        class="navbar-wpp" target="_blank" rel="noopener" onclick="closeNav()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.999-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+        </svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <!-- WhatsApp Flutuante -->
+  <a href="https://wa.me/5511980375558?text=Olá!%20Preciso%20de%20ajuda%20com%20minha%20máquina%20de%20lavar"
+    class="wpp-float" target="_blank" rel="noopener" aria-label="WhatsApp" title="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.999-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+    </svg>
+  </a>
+
+  <!-- ========================================
        HEADER / HERO
        ======================================== -->
   <section class="hero">
     <div class="container">
-      <div class="hero-content">
-        <img src="logo.png" alt="Logo Doutor Resolve" class="logo">
-        <div class="trust-badge">
-          <span style="font-size: 1.2em;">🛡️</span>Orçamento 100% Gratuito e Seguro
+      <div class="hero-content animate-fade-in">
+
+        <!-- Social proof topo -->
+        <div class="hero-social-proof">
+          <div class="hsp-item">
+            <span class="hsp-stars">★★★★★</span>
+            <span><strong>4.9/5</strong> — 847 avaliações</span>
+          </div>
+          <div class="hsp-divider"></div>
+          <div class="hsp-item">✅ <strong>+3.200</strong> clientes atendidos</div>
+          <div class="hsp-divider"></div>
+          <div class="hsp-item">⚡ Resposta em <strong>~5 min</strong></div>
         </div>
-    <h1>
-          Sua Máquina "Adoeceu"? <br />
+
+        <h1>
+          Sua Máquina "Adoeceu"?<br />
           <span
-            style="color: #a5b4fc; background: linear-gradient(135deg, #a5b4fc 0%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">O
+            style="background: linear-gradient(135deg, #a5b4fc 0%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">O
             Doutor Resolve.</span>
         </h1>
 
-<p class="hero-subtitle">
-          Diagnóstico <strong>técnico e preciso</strong>. Identifique os sintomas, descubra a gravidade e receba a
-          solução direto no WhatsApp.
+        <p class="hero-subtitle">
+          Diagnóstico <strong>técnico e gratuito</strong> em 5 minutos. Descubra o problema,
+          receba o orçamento e agende o técnico — tudo pelo WhatsApp.
         </p>
 
         <div class="cta-group">
-          <a href="#formulario-diagnostico" class="btn btn-white">
+          <a href="#formulario-diagnostico" class="btn btn-white" style="font-size:1.1rem; padding: 20px 44px;">
             <span class="btn-icon">🔧</span>
-            <span>Fazer Diagnóstico Grátis</span>
+            <span>Diagnóstico Grátis Agora</span>
           </a>
-          <a href="#como-funciona" class="btn btn-primary">
-            <span>Como Funciona</span>
+          <a href="https://wa.me/5511980375558?text=Olá!%20Preciso%20de%20ajuda%20com%20minha%20máquina%20de%20lavar"
+            class="btn btn-success" target="_blank" rel="noopener" style="font-size:1.1rem; padding: 20px 36px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" style="flex-shrink:0">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.999-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+            </svg>
+            <span>Falar no WhatsApp</span>
           </a>
         </div>
+
+        <p style="color:rgba(255,255,255,0.6); font-size:0.82rem; margin-top:16px;">
+          🔒 100% Gratuito • Sem compromisso • Atendimento humanizado
+        </p>
       </div>
     </div>
   </section>
+
+  <!-- ========================================
+       BRAND STRIP
+       ======================================== -->
+  <div class="brand-strip">
+    <div class="brand-strip-inner">
+      <span class="brand-strip-label">Marcas atendidas</span>
+      <span class="brand-pill">🔵 Brastemp</span>
+      <span class="brand-pill">🟢 Consul</span>
+      <span class="brand-pill">⚪ Electrolux</span>
+      <span class="brand-pill">🔴 Samsung</span>
+      <span class="brand-pill">🟡 LG</span>
+      <span class="brand-pill">🟠 Whirlpool</span>
+      <span class="brand-pill">⚫ Panasonic</span>
+    </div>
+  </div>
 
   <!-- ========================================
        MAIN CONTENT
@@ -859,7 +1823,8 @@
             </p>
 
             <div class="categories-grid">
-              <div class="category-card simple" data-category="Simples" onclick="selectCategory('Simples')" style="min-width: 0;">
+              <div class="category-card simple" data-category="Simples" onclick="selectCategory('Simples')"
+                style="min-width: 0;">
                 <span class="category-icon">🟢</span>
                 <h4 class="category-title">Reparo Simples</h4>
                 <p class="category-description">
@@ -898,12 +1863,12 @@
               </div>
             </div>
           </div>
- -->
+          -->
 
 
 
 
- <div id="como-funciona" class="steps">
+          <div id="como-funciona" class="steps">
             <h2 style="text-align: center;">O Processo de Cura da Sua Máquina</h2>
             <p style="text-align: center; color: var(--text-secondary); max-width: 700px; margin: 0 auto 0;">
               Um sistema inteligente para identificar e resolver o problema sem complicação.
@@ -986,7 +1951,7 @@
 
 
 
-          
+
           <!-- FORMULÁRIO DE DIAGNÓSTICO -->
           <div id="formulario-diagnostico" style="margin-top: 80px;">
             <div class="card" style="max-width: 700px; margin: 0 auto;">
@@ -1152,19 +2117,231 @@
   </section>
 
   <!-- ========================================
+       STATS SECTION
+       ======================================== -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Números que Comprovam Nossa Confiança</h2>
+        <p class="section-lead" style="color:rgba(255,255,255,0.6)">
+          Mais de 5 anos ajudando famílias a resolverem problemas com máquinas de lavar.
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🏠</div>
+          <div class="stat-number" data-target="3200" data-suffix="+">0</div>
+          <div class="stat-label">Clientes Atendidos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-number" data-target="4.9" data-suffix="/5" data-decimal="true">0</div>
+          <div class="stat-label">Nota Média Google</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-number" data-target="5" data-suffix=" min">0</div>
+          <div class="stat-label">Tempo de Resposta</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔧</div>
+          <div class="stat-number" data-target="98" data-suffix="%">0</div>
+          <div class="stat-label">Taxa de Resolução</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       TESTIMONIALS
+       ======================================== -->
+  <section class="section testimonials" id="depoimentos">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">💬 Depoimentos Reais</div>
+        <h2>O Que Nossos Clientes Dizem</h2>
+        <p class="section-lead">Mais de 847 avaliações 5 estrelas. Veja o que quem já usou pensa.</p>
+      </div>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Minha Brastemp estava travando no enxágue há 2 semanas. Em menos de 10 minutos após enviar o formulário,
+            o técnico já entrou em contato e no dia seguinte estava resolvido. Serviço impecável!"
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MC</div>
+            <div>
+              <div class="testimonial-name">Maria Claudia S.</div>
+              <div class="testimonial-role">São Paulo, SP</div>
+              <div class="testimonial-badge">✅ Reparo Realizado</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Achei que ia ter que comprar uma máquina nova. Através do diagnóstico descobri que era apenas
+            a bomba d'água. Economizei mais de R$1.200. Recomendo demais, atendimento foi rápido e honesto!"
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RP</div>
+            <div>
+              <div class="testimonial-name">Mongaguá</div>
+              <div class="testimonial-role">Itanhaém, SP</div>
+              <div class="testimonial-badge">✅ Economizou R$1.200</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Electrolux fazia barulho estranho e estava com medo de estragar mais. O diagnóstico foi certeiro
+            — era o rolamento. Técnico veio no mesmo dia, super profissional. Já indiquei para 3 amigas!"
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AO</div>
+            <div>
+              <div class="testimonial-name">Ana Oliveira</div>
+              <div class="testimonial-role">Santo André, SP</div>
+              <div class="testimonial-badge">✅ Atendimento no Mesmo Dia</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       FAQ
+       ======================================== -->
+  <section class="section faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">❓ Perguntas Frequentes</div>
+        <h2>Dúvidas? A Gente Responde</h2>
+        <p class="section-lead">Respondemos as dúvidas mais comuns antes mesmo de você perguntar.</p>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>O diagnóstico é realmente gratuito?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Sim, 100% gratuito! Você preenche o formulário, descrevemos o problema da sua máquina e você recebe
+              o orçamento por WhatsApp sem pagar nada. Só há custo se você decidir contratar o serviço de reparo.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Qual o prazo de resposta após preencher o formulário?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Em média respondemos em até 5 minutos durante o horário comercial (8h às 20h, de segunda a sábado).
+              Pedidos feitos fora desse horário são respondidos na manhã do próximo dia útil.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Quais marcas e modelos vocês atendem?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Atendemos todas as principais marcas: Brastemp, Consul, Electrolux, Samsung, LG, Panasonic, Whirlpool
+              e outras. Tanto máquinas de coluna quanto lava e seca. Se tiver dúvida, entre em contato pelo WhatsApp.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Minha máquina é muito antiga, ainda vale consertar?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Boa pergunta! Dependendo da marca, máquinas com mais de 10 anos ainda têm peças disponíveis e
+              vale muito a pena consertar — especialmente se o problema for simples. O técnico vai ser honesto
+              e só indicar o conserto se realmente compensar financeiramente.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Vocês atendem em qual região?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Atendemos São Paulo capital e Grande São Paulo (ABCDMR e outros municípios da região metropolitana).
+              Em caso de dúvida sobre sua cidade, mande mensagem no WhatsApp e verificamos a disponibilidade.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       CTA FINAL
+       ======================================== -->
+  <section class="cta-final">
+    <div class="container">
+      <div class="section-label" style="background:rgba(255,255,255,0.15); color:#fff; margin-bottom:20px;">🚀 Comece
+        Agora</div>
+      <h2>Pronto Para Resolver de Vez?</h2>
+      <p>Mais de 3.200 clientes já resolveram seus problemas com a gente. Você é o próximo!</p>
+      <div class="btn-cta-group">
+        <a href="#formulario-diagnostico" class="btn-outline-white">
+          🔧 Fazer Diagnóstico Grátis
+        </a>
+        <a href="https://wa.me/5511980375558?text=Olá!%20Preciso%20de%20ajuda%20com%20minha%20máquina%20de%20lavar"
+          class="btn-wpp-large" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.999-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+          </svg>
+          Chamar no WhatsApp Agora
+        </a>
+      </div>
+      <div class="cta-trust-row">
+        <span class="cta-trust-item">✅ Sem compromisso</span>
+        <span class="cta-trust-item">🔒 Dados protegidos</span>
+        <span class="cta-trust-item">⚡ Resposta em 5 min</span>
+        <span class="cta-trust-item">❌ Zero custo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
        FOOTER
        ======================================== -->
   <footer>
     <div class="container">
       <div class="footer-content">
-        <h4>🔧 Diagnóstico Rápido</h4>
-        <p>Máquinas de Lavar</p>
-        <p>Conectando pessoas a soluções rápidas e confiáveis</p>
-
+        <img src="img.png" alt="Marcas atendidas"
+          style="height:42px; width:auto; margin:0 auto 16px; display:block; opacity:0.6; filter:brightness(0) invert(1);">
+        <h4 style="font-size:1.1rem;">🔧 Doutor Resolve — Máquinas de Lavar</h4>
+        <p>Atendimento em São Paulo e Grande SP • (11) 98037-5558</p>
+        <div style="display:flex; gap:12px; justify-content:center; margin:16px 0; flex-wrap:wrap;">
+          <a href="https://wa.me/5511980375558" target="_blank"
+            style="color:rgba(255,255,255,0.7); font-size:0.875rem; text-decoration:none;">💬 WhatsApp</a>
+          <span style="color:rgba(255,255,255,0.3)">•</span>
+          <a href="#formulario-diagnostico"
+            style="color:rgba(255,255,255,0.7); font-size:0.875rem; text-decoration:none;">🔧 Diagnóstico Grátis</a>
+          <span style="color:rgba(255,255,255,0.3)">•</span>
+          <a href="#faq" style="color:rgba(255,255,255,0.7); font-size:0.875rem; text-decoration:none;">❓ FAQ</a>
+        </div>
         <div class="footer-divider"></div>
-
         <div class="footer-bottom">
-          © 2024 Diagnóstico Rápido • Desenvolvido por Felipe
+          © 2025 Doutor Resolve • Todos os direitos reservados
         </div>
       </div>
     </div>
@@ -1290,6 +2467,116 @@ _Enviado via Diagnóstico Rápido_
           });
         }
       });
+    });
+
+    // ========================================
+    // FAQ ACCORDION
+    // ========================================
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+      // fecha todos
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').classList.remove('open');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.classList.add('open');
+      }
+    }
+
+    // ========================================
+    // COUNTER ANIMATION
+    // ========================================
+    function animateCounters() {
+      document.querySelectorAll('[data-target]').forEach(el => {
+        const target = parseFloat(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const isDecimal = el.dataset.decimal === 'true';
+        const duration = 1800;
+        const step = 16;
+        const steps = duration / step;
+        let current = 0;
+        const increment = target / steps;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.textContent = (isDecimal ? current.toFixed(1) : Math.floor(current)) + suffix;
+        }, step);
+      });
+    }
+
+    // Disparar contador quando a seção ficar visível
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(statsSection);
+    }
+
+    // ========================================
+    // SCROLL REVEAL (fade-in elements)
+    // ========================================
+    const revealEls = document.querySelectorAll('.testimonial-card, .faq-item, .stat-card, .benefit, .category-card');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, i * 80);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealEls.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      revealObserver.observe(el);
+    });
+
+    // Navbar hamburger
+    const navToggle = document.getElementById('navToggle');
+    const navMobile = document.getElementById('navMobile');
+
+    navToggle.addEventListener('click', function () {
+      const isOpen = navMobile.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    function closeNav() {
+      navMobile.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    // Fechar menu ao clicar fora
+    document.addEventListener('click', function (e) {
+      if (!navToggle.contains(e.target) && !navMobile.contains(e.target)) {
+        closeNav();
+      }
+    });
+
+    // Scroll na navbar: adiciona sombra mais forte
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 10) {
+        navbar.style.boxShadow = '0 4px 30px rgba(0,0,0,0.15)';
+      } else {
+        navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.10)';
+      }
     });
   </script>
 
