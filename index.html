@@ -1623,6 +1623,29 @@
       outline: 3px solid var(--primary);
       outline-offset: 2px;
     }
+
+    /* Correções específicas para mobile */
+    @media (max-width: 768px) {
+      .btn {
+        width: 100%;
+        white-space: normal !important;
+        padding: 16px 24px !important;
+        font-size: 1rem !important;
+        text-align: center;
+      }
+
+      .cta-group {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .wpp-float {
+        bottom: 20px;
+        right: 16px;
+        width: 60px;
+        height: 60px;
+      }
+    }
   </style>
 </head>
 
@@ -1649,7 +1672,7 @@
       <a href="#" class="navbar-logo" aria-label="Doutor Resolve - Início">
         <img src="img.png" alt="Marcas atendidas: Brastemp, Consul, Electrolux">
         <div class="navbar-brand-text">
-          <span class="navbar-brand-name">🔧 Doutor Resolve</span>
+          <span class="navbar-brand-name">🔧 Vicentec</span>
           <span class="navbar-brand-sub">Máquinas de Lavar</span>
         </div>
       </a>
@@ -1709,11 +1732,7 @@
 
         <!-- Social proof topo -->
         <div class="hero-social-proof">
-          <div class="hsp-item">
-            <span class="hsp-stars">★★★★★</span>
-            <span><strong>4.9/5</strong> — 847 avaliações</span>
-          </div>
-          <div class="hsp-divider"></div>
+
           <div class="hsp-item">✅ <strong>+3.200</strong> clientes atendidos</div>
           <div class="hsp-divider"></div>
           <div class="hsp-item">⚡ Resposta em <strong>~5 min</strong></div>
@@ -1722,8 +1741,8 @@
         <h1>
           Sua Máquina "Adoeceu"?<br />
           <span
-            style="background: linear-gradient(135deg, #a5b4fc 0%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">O
-            Doutor Resolve.</span>
+            style="background: linear-gradient(135deg, #a5b4fc 0%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">A
+            Vicentec Resolve.</span>
         </h1>
 
         <p class="hero-subtitle">
@@ -2089,7 +2108,7 @@
             <h3>Comece Agora!</h3>
             <p>Preencha o formulário rápido e envie direto pelo WhatsApp.</p>
 
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfnuaA--i-cT-xw1jCER1ZbehXdTfCR5mDWZxTl6RSUdCQypA/viewform?usp=dialog"
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScJ6KengT6ypqsqoNZX1ApeL-Oz2tGkx_wLJdg17vRNaJD6Hw/viewform?usp=publish-editor"
               class="btn btn-white" style="width: 100%; background: #FFFFFF; color: var(--primary);">
               <span class="btn-icon">🚀</span>
               <span>Preencher Formulário</span>
@@ -2174,7 +2193,7 @@
             <div class="testimonial-avatar">MC</div>
             <div>
               <div class="testimonial-name">Maria Claudia S.</div>
-              <div class="testimonial-role">São Paulo, SP</div>
+              <div class="testimonial-role">Peruíbe, SP</div>
               <div class="testimonial-badge">✅ Reparo Realizado</div>
             </div>
           </div>
@@ -2206,7 +2225,7 @@
             <div class="testimonial-avatar">AO</div>
             <div>
               <div class="testimonial-name">Ana Oliveira</div>
-              <div class="testimonial-role">Santo André, SP</div>
+              <div class="testimonial-role">Santos, SP</div>
               <div class="testimonial-badge">✅ Atendimento no Mesmo Dia</div>
             </div>
           </div>
@@ -2280,7 +2299,8 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p>Atendemos São Paulo capital e Grande São Paulo (ABCDMR e outros municípios da região metropolitana).
+            <p>Atendemos a Baixada Santista: Santos, São Vicente, Praia Grande, Guarujá, Cubatão, Mongaguá, Itanhaém e
+              Peruíbe.
               Em caso de dúvida sobre sua cidade, mande mensagem no WhatsApp e verificamos a disponibilidade.</p>
           </div>
         </div>
@@ -2329,7 +2349,7 @@
         <img src="img.png" alt="Marcas atendidas"
           style="height:42px; width:auto; margin:0 auto 16px; display:block; opacity:0.6; filter:brightness(0) invert(1);">
         <h4 style="font-size:1.1rem;">🔧 Doutor Resolve — Máquinas de Lavar</h4>
-        <p>Atendimento em São Paulo e Grande SP • (11) 98037-5558</p>
+        <p>Atendimento na Baixada Santista • (11) 98037-5558</p>
         <div style="display:flex; gap:12px; justify-content:center; margin:16px 0; flex-wrap:wrap;">
           <a href="https://wa.me/5511980375558" target="_blank"
             style="color:rgba(255,255,255,0.7); font-size:0.875rem; text-decoration:none;">💬 WhatsApp</a>
